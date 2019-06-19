@@ -18,11 +18,15 @@ public class MainActivity extends AppCompatActivity {
 
     TextView txt_name,txt_watcher;
 
+    ArrayList<Github> gits;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        gits = new ArrayList<>();
 
         txt_name = findViewById(R.id.name);
         txt_watcher = findViewById(R.id.watcher);
@@ -55,6 +59,27 @@ public class MainActivity extends AppCompatActivity {
 */
 
 
+                    //Fetch Multi value from Each child
+
+
+                Iterable<DataSnapshot> childs = dataSnapshot.getChildren();
+
+                for(DataSnapshot snap : childs)
+                {
+                    Github gt = snap.getValue(Github.class);
+
+                    //System.out.println(gt.getId()+" "+gt.getName()+" "+gt.getWatchers());
+
+
+                    gits.add(gt);
+                }
+
+                System.out.println("Arraylist Size : "+gits.size());
+
+                for (int i=0;i<gits.size();i++)
+                {
+                    System.out.println(gits.get(i).getId()+" "+gits.get(i).getName()+" "+gits.get(i).getWatchers());
+                }
 
             }
 
